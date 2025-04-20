@@ -96,8 +96,8 @@ const App = () => {
     const pageHeight = 100000;
     const elements = [];
     
-    // Reduce number of decorative elements and optimize animations for mobile
-    for (let i = 0; i < 2500; i++) { // Reduced from 4000 to 2500
+    // Further reduce decorative elements and optimize animations for mobile
+    for (let i = 0; i < 1500; i++) { // Reduced from 2500 to 1500
       const type = Math.random() > 0.7 ? 'leaf' : 
                   Math.random() > 0.6 ? 'plant' : 
                   Math.random() > 0.5 ? 'mountain' : 
@@ -105,14 +105,14 @@ const App = () => {
                   Math.random() > 0.3 ? 'cloud' :
                   Math.random() > 0.2 ? 'circle' : 'star';
       
-      const size = Math.random() * 40 + 5; // Reduced max size (5-45px)
+      const size = Math.random() * 30 + 5; // Further reduced max size (5-35px)
       const opacity = 0.8 + Math.random() * 0.2;
       const rotation = Math.random() * 360;
-      const scale = 0.2 + Math.random() * 1.5; // Reduced scale range
-      const animationDuration = 5 + Math.random() * 5; // Slower animations (5-10s)
+      const scale = 0.2 + Math.random() * 1.2; // Further reduced scale range
+      const animationDuration = 8 + Math.random() * 4; // Even slower animations (8-12s)
       const animationDelay = Math.random() * -5;
-      const moveRange = 10 + Math.random() * 20; // Reduced movement range
-      const rotateRange = 5 + Math.random() * 10; // Reduced rotation range
+      const moveRange = 5 + Math.random() * 15; // Further reduced movement range
+      const rotateRange = 3 + Math.random() * 6; // Further reduced rotation range
       
       elements.push({
         id: `decor-${i}`,
@@ -133,8 +133,8 @@ const App = () => {
       });
     }
 
-    // Increase number of eggs by 10%
-    const totalEggs = Math.floor((discounts.length + spoiledEggs.length) * 1.1);
+    // Increase number of eggs by 50%
+    const totalEggs = Math.floor((discounts.length + spoiledEggs.length) * 1.5);
     const additionalEggs = totalEggs - (discounts.length + spoiledEggs.length);
     const extraSpoiledEggs = Array(additionalEggs).fill(null).map(() => ({
       type: 'spoiled',
@@ -145,12 +145,12 @@ const App = () => {
     // Add eggs with optimized positioning
     [...discounts, ...spoiledEggs, ...extraSpoiledEggs].forEach((item, index) => {
       // Calculate position based on index to ensure even distribution
-      const sectionWidth = window.innerWidth / 3; // Divide page into 3 vertical sections
-      const sectionHeight = pageHeight / 3; // Divide page into 3 horizontal sections
+      const sectionWidth = window.innerWidth / 4; // Divide page into 4 vertical sections
+      const sectionHeight = pageHeight / 4; // Divide page into 4 horizontal sections
       
-      const sectionIndex = index % 9; // 9 sections total (3x3 grid)
-      const row = Math.floor(sectionIndex / 3);
-      const col = sectionIndex % 3;
+      const sectionIndex = index % 16; // 16 sections total (4x4 grid)
+      const row = Math.floor(sectionIndex / 4);
+      const col = sectionIndex % 4;
       
       // Add some randomness within each section
       const top = (row * sectionHeight) + (Math.random() * sectionHeight * 0.8);
@@ -158,12 +158,12 @@ const App = () => {
       
       const rotation = Math.random() * 360;
       const opacity = 1; // Full opacity for eggs
-      const size = Math.random() * 60 + 5;
-      const scale = 0.2 + Math.random() * 2.5;
-      const animationDuration = 3 + Math.random() * 7;
+      const size = Math.random() * 40 + 5; // Reduced egg size
+      const scale = 0.2 + Math.random() * 1.2; // Reduced scale range
+      const animationDuration = 8 + Math.random() * 4; // Slower animations
       const animationDelay = Math.random() * -5;
-      const moveRange = 20 + Math.random() * 40;
-      const rotateRange = 10 + Math.random() * 20;
+      const moveRange = 5 + Math.random() * 15; // Reduced movement range
+      const rotateRange = 3 + Math.random() * 6; // Reduced rotation range
       
       // Ensure minimum distance between eggs
       let validPosition = false;
@@ -179,7 +179,7 @@ const App = () => {
               Math.pow(finalTop - existingElement.position.top, 2) +
               Math.pow(finalLeft - existingElement.position.left, 2)
             );
-            if (distance < 200) { // Minimum 200px between eggs
+            if (distance < 150) { // Reduced minimum distance between eggs
               validPosition = false;
               // Try a new random position within the same section
               finalTop = (row * sectionHeight) + (Math.random() * sectionHeight * 0.8);
@@ -351,10 +351,10 @@ const App = () => {
       }}
     >
       {/* Header */}
-      <header className="fixed top-0 w-full bg-white bg-opacity-90 z-10 p-4 shadow-sm">
-        <div className="container mx-auto">
-          <div className="flex justify-between items-center">
-            <div className="flex gap-6">
+      <header className="fixed top-0 w-full bg-white bg-opacity-90 z-10 p-2 sm:p-4 shadow-sm">
+        <div className="container mx-auto px-2 sm:px-4">
+          <div className="flex flex-col sm:flex-row justify-between items-center gap-2 sm:gap-0">
+            <div className="flex gap-4 sm:gap-6">
               <a 
                 href="https://www.instagram.com/potterychicago" 
                 target="_blank" 
@@ -362,7 +362,7 @@ const App = () => {
                 className="text-gray-700 hover:text-pink-500 transition-colors duration-300"
                 title="Follow us on Instagram"
               >
-                <FaInstagram className="w-7 h-7" />
+                <FaInstagram className="w-5 h-5 sm:w-7 sm:h-7" />
               </a>
               <a 
                 href="https://thepotteryloop.com" 
@@ -371,19 +371,19 @@ const App = () => {
                 className="text-gray-700 hover:text-blue-500 transition-colors duration-300"
                 title="Visit our website"
               >
-                <FaGlobe className="w-7 h-7" />
+                <FaGlobe className="w-5 h-5 sm:w-7 sm:h-7" />
               </a>
             </div>
-            <h1 className="text-2xl font-bold text-black">
+            <h1 className="text-lg sm:text-2xl font-bold text-black text-center">
               Pottery Chicago Easter Hunt
             </h1>
-            <div className="flex gap-6">
+            <div className="flex gap-4 sm:gap-6">
               <a 
                 href="mailto:potterchicago@gmail.com?subject=Easter Egg Pottery Question" 
                 className="text-gray-700 hover:text-red-500 transition-colors duration-300"
                 title="Contact us"
               >
-                <FaEnvelope className="w-7 h-7" />
+                <FaEnvelope className="w-5 h-5 sm:w-7 sm:h-7" />
               </a>
             </div>
           </div>
@@ -391,12 +391,12 @@ const App = () => {
       </header>
 
       {/* Main Content */}
-      <main className="pt-20">
-        <section className="container mx-auto px-4 py-8">
-          <h2 className="text-4xl font-bold text-center mb-8 text-black">
+      <main className="pt-16 sm:pt-20">
+        <section className="container mx-auto px-4 py-4 sm:py-8">
+          <h2 className="text-2xl sm:text-4xl font-bold text-center mb-4 sm:mb-8 text-black">
             Find Hidden Easter Eggs!
           </h2>
-          <p className="text-center text-lg mb-12 text-black">
+          <p className="text-base sm:text-lg text-center mb-8 sm:mb-12 text-black px-2">
             Click on the hidden eggs to discover special discounts for pottery classes!
             Valid for 48 hours only.
           </p>
@@ -412,7 +412,7 @@ const App = () => {
       <AnimatePresence>
         {showModal && (
           <motion.div
-            className="fixed inset-0 flex items-center justify-center z-[1000]"
+            className="fixed inset-0 flex items-center justify-center z-[1000] p-4"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -420,7 +420,7 @@ const App = () => {
           >
             <div className="absolute inset-0 bg-black bg-opacity-50" />
             <motion.div
-              className="relative bg-white p-6 rounded-lg shadow-xl max-w-sm mx-4 z-[1001]"
+              className="relative bg-white p-4 sm:p-6 rounded-lg shadow-xl max-w-sm w-full mx-4 z-[1001]"
               initial={{ scale: 0.5, y: -50 }}
               animate={{ scale: 1, y: 0 }}
               exit={{ scale: 0.5, y: -50 }}
@@ -431,29 +431,29 @@ const App = () => {
                 onClick={() => setShowModal(false)}
                 className="absolute top-2 right-2 text-gray-700 hover:text-gray-900"
               >
-                <FaTimes className="w-5 h-5" />
+                <FaTimes className="w-4 h-4 sm:w-5 sm:h-5" />
               </button>
 
-              <h3 className="text-2xl font-bold mb-4 text-black">
+              <h3 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4 text-black">
                 {currentItem?.type === 'spoiled' ? 'Oops!' : 'Congratulations! 🎉'}
               </h3>
               {currentItem?.type === 'spoiled' ? (
                 <>
-                  <p className="text-lg mb-4 text-black">Just clay! Try again!</p>
-                  <p className="text-sm text-gray-700">Keep searching for more eggs!</p>
+                  <p className="text-base sm:text-lg mb-3 sm:mb-4 text-black">Just clay! Try again!</p>
+                  <p className="text-xs sm:text-sm text-gray-700">Keep searching for more eggs!</p>
                 </>
               ) : (
                 <>
-                  <p className="text-lg mb-4 text-black">You found a special discount!</p>
-                  <p className="text-xl font-bold mb-4 text-black">{currentItem?.value}</p>
-                  <p className="text-lg mb-4 text-black">Use code: <span className="font-bold">{currentItem?.code}</span></p>
-                  <p className="text-sm text-gray-700 mb-6">Valid for 48 hours only!</p>
+                  <p className="text-base sm:text-lg mb-3 sm:mb-4 text-black">You found a special discount!</p>
+                  <p className="text-lg sm:text-xl font-bold mb-3 sm:mb-4 text-black">{currentItem?.value}</p>
+                  <p className="text-base sm:text-lg mb-3 sm:mb-4 text-black">Use code: <span className="font-bold">{currentItem?.code}</span></p>
+                  <p className="text-xs sm:text-sm text-gray-700 mb-4 sm:mb-6">Valid for 48 hours only!</p>
                   
                   {/* Action Buttons */}
-                  <div className="flex flex-col gap-3">
+                  <div className="flex flex-col gap-2 sm:gap-3">
                     <button
                       onClick={() => handleCopyCode(currentItem?.code)}
-                      className={`w-full px-4 py-2 rounded-lg transition-colors flex items-center justify-center gap-2 ${
+                      className={`w-full px-3 sm:px-4 py-2 rounded-lg transition-colors flex items-center justify-center gap-2 text-sm sm:text-base ${
                         codeCopied 
                           ? 'bg-green-500 text-white' 
                           : 'bg-terracotta text-white hover:bg-terracotta-dark'
@@ -461,7 +461,7 @@ const App = () => {
                     >
                       {codeCopied ? (
                         <>
-                          <FaCheck className="w-5 h-5" />
+                          <FaCheck className="w-4 h-4 sm:w-5 sm:h-5" />
                           Code Copied
                         </>
                       ) : (
@@ -472,7 +472,7 @@ const App = () => {
                       href="https://ThePotteryLoop.com"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="w-full px-4 py-2 bg-sage text-white rounded-lg hover:bg-sage-dark transition-colors text-center"
+                      className="w-full px-3 sm:px-4 py-2 bg-sage text-white rounded-lg hover:bg-sage-dark transition-colors text-center text-sm sm:text-base"
                     >
                       Book Class
                     </a>
