@@ -7,16 +7,14 @@ export default defineConfig({
   base: '/',
   build: {
     outDir: 'dist',
-    assetsDir: 'assets',
     sourcemap: false,
     minify: 'terser',
     rollupOptions: {
       output: {
-        entryFileNames: `assets/[name].js`,
-        chunkFileNames: `assets/[name].js`,
-        assetFileNames: `assets/[name].[ext]`,
         manualChunks: {
-          'vendor': ['react', 'react-dom', 'framer-motion', 'react-icons/fa']
+          'react-vendor': ['react', 'react-dom'],
+          'framer-motion': ['framer-motion'],
+          'react-icons': ['react-icons']
         }
       }
     }
