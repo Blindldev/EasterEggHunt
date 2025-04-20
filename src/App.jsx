@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FaEgg, FaLeaf, FaSeedling, FaMountain, FaWater, FaCloud, FaCircle, FaSquare, FaStar, FaTimes, FaCheck, FaInstagram, FaGlobe, FaEnvelope, FaWorm } from 'react-icons/fa';
+import { FaEgg, FaLeaf, FaSeedling, FaMountain, FaWater, FaCloud, FaCircle, FaSquare, FaStar, FaTimes, FaCheck, FaInstagram, FaGlobe, FaEnvelope, FaSeedling } from 'react-icons/fa';
 
 // Color themes
 const colorThemes = [
@@ -391,7 +391,7 @@ const App = () => {
         {/* Easter message at the bottom */}
         <div className="text-center mt-32 mb-16">
           <div className="inline-block transform rotate-12">
-            <FaWorm className="text-6xl text-white mx-auto mb-4" />
+            <FaSeedling className="text-6xl text-white mx-auto mb-4" />
           </div>
           <p className="text-white text-xl font-medium">
             You reached the bottom... don't know how but HAPPY EASTER! 
