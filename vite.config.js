@@ -11,6 +11,7 @@ export default defineConfig({
     minify: 'terser',
     rollupOptions: {
       output: {
+        format: 'es',
         manualChunks: {
           'react-vendor': ['react', 'react-dom'],
           'framer-motion': ['framer-motion'],
@@ -21,6 +22,9 @@ export default defineConfig({
   },
   server: {
     port: 5173,
-    strictPort: true
+    strictPort: true,
+    headers: {
+      'Content-Type': 'application/javascript'
+    }
   }
 }) 
