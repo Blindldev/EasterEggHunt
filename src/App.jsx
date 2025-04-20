@@ -133,8 +133,42 @@ const App = () => {
       });
     }
 
-    // Increase number of eggs by 50%
-    const totalEggs = Math.floor((discounts.length + spoiledEggs.length) * 1.5);
+    // Add guaranteed egg near the top
+    const guaranteedEgg = {
+      code: 'POTTERY5',
+      value: '$5 off pottery wheel class',
+      rarity: 'common',
+      size: 'medium'
+    };
+
+    // Add guaranteed egg first
+    const topSectionHeight = pageHeight * 0.1; // Top 10% of the page
+    const topSectionWidth = window.innerWidth;
+    
+    const guaranteedTop = Math.random() * topSectionHeight;
+    const guaranteedLeft = Math.random() * (topSectionWidth - 100) + 50;
+    
+    elements.push({
+      id: 'guaranteed-egg',
+      type: 'egg',
+      isEgg: true,
+      item: guaranteedEgg,
+      position: {
+        top: guaranteedTop,
+        left: guaranteedLeft,
+        rotation: Math.random() * 360,
+        scale: 0.8 + Math.random() * 0.4,
+        opacity: 1,
+        size: 20 + Math.random() * 10, // Medium size (20-30px)
+        animationDuration: 8 + Math.random() * 4,
+        animationDelay: Math.random() * -5,
+        moveRange: 5 + Math.random() * 15,
+        rotateRange: 3 + Math.random() * 6
+      }
+    });
+
+    // Increase number of eggs by 20%
+    const totalEggs = Math.floor((discounts.length + spoiledEggs.length) * 1.2);
     const additionalEggs = totalEggs - (discounts.length + spoiledEggs.length);
     const extraSpoiledEggs = Array(additionalEggs).fill(null).map(() => ({
       type: 'spoiled',
@@ -142,8 +176,8 @@ const App = () => {
       size: Math.random() > 0.5 ? 'medium' : 'small'
     }));
 
-    // Add eggs with optimized positioning
-    [...discounts, ...spoiledEggs, ...extraSpoiledEggs].forEach((item, index) => {
+    // Add remaining eggs with optimized positioning
+    [...discounts.filter(d => d.code !== 'POTTERY5'), ...spoiledEggs, ...extraSpoiledEggs].forEach((item, index) => {
       // Calculate position based on index to ensure even distribution
       const sectionWidth = window.innerWidth / 4; // Divide page into 4 vertical sections
       const sectionHeight = pageHeight / 4; // Divide page into 4 horizontal sections
