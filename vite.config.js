@@ -10,6 +10,9 @@ export default defineConfig({
     sourcemap: false,
     minify: 'terser',
     rollupOptions: {
+      input: {
+        main: './index.html'
+      },
       output: {
         format: 'es',
         entryFileNames: 'assets/[name].js',
