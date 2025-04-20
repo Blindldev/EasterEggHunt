@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FaEgg, FaLeaf, FaSeedling, FaMountain, FaWater, FaCloud, FaCircle, FaSquare, FaStar, FaTimes, FaCheck } from 'react-icons/fa';
+import { FaEgg, FaLeaf, FaSeedling, FaMountain, FaWater, FaCloud, FaCircle, FaSquare, FaStar, FaTimes, FaCheck, FaInstagram, FaGlobe, FaEnvelope } from 'react-icons/fa';
 
 // Color themes
 const colorThemes = [
@@ -326,15 +326,41 @@ const App = () => {
     <div 
       className="min-h-screen relative transition-colors duration-1000"
       style={{
-        background: `linear-gradient(to bottom, ${currentTheme.primary}, ${currentTheme.secondary})`
+        background: `linear-gradient(135deg, ${currentTheme.primary} 0%, ${currentTheme.secondary} 100%)`
       }}
     >
       {/* Header */}
       <header className="fixed top-0 w-full bg-white bg-opacity-90 z-10 p-4 shadow-sm">
         <div className="container mx-auto">
-          <h1 className="text-2xl font-bold text-center text-black">
-            Pottery Chicago Easter Hunt
-          </h1>
+          <div className="flex justify-between items-center">
+            <h1 className="text-2xl font-bold text-black">
+              Pottery Chicago Easter Hunt
+            </h1>
+            <div className="flex gap-4">
+              <a 
+                href="https://www.instagram.com/potterychicago" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-gray-700 hover:text-gray-900 transition-colors"
+              >
+                <FaInstagram className="w-6 h-6" />
+              </a>
+              <a 
+                href="https://thepotteryloop.com" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-gray-700 hover:text-gray-900 transition-colors"
+              >
+                <FaGlobe className="w-6 h-6" />
+              </a>
+              <a 
+                href="mailto:potterchicago@gmail.com?subject=Easter Egg Pottery Question" 
+                className="text-gray-700 hover:text-gray-900 transition-colors"
+              >
+                <FaEnvelope className="w-6 h-6" />
+              </a>
+            </div>
+          </div>
         </div>
       </header>
 
