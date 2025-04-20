@@ -7,6 +7,7 @@ export default defineConfig({
   base: '/EasterEggHunt/',
   build: {
     outDir: 'dist',
+    assetsDir: 'assets',
     sourcemap: false,
     minify: 'terser',
     rollupOptions: {
@@ -21,7 +22,7 @@ export default defineConfig({
         manualChunks: {
           'react-vendor': ['react', 'react-dom'],
           'framer-motion': ['framer-motion'],
-          'react-icons': ['react-icons']
+          'react-icons': ['react-icons/fa']
         }
       }
     }

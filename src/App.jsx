@@ -1,6 +1,9 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FaEgg, FaLeaf, FaSeedling, FaMountain, FaWater, FaCloud, FaCircle, FaSquare, FaStar, FaTimes, FaCheck, FaInstagram, FaGlobe, FaEnvelope } from 'react-icons/fa';
+import '../src/index.css';
+
+console.log('App component initializing...');
 
 // Color themes
 const colorThemes = [
@@ -30,6 +33,8 @@ const spoiledEggs = Array(30).fill(null).map(() => ({
 }));
 
 const App = () => {
+  console.log('App function component rendering...');
+
   const [showDevMode] = useState(false);
   const [foundDiscounts, setFoundDiscounts] = useState([]);
   const [showModal, setShowModal] = useState(false);
@@ -42,8 +47,8 @@ const App = () => {
   });
   const containerRef = useRef(null);
 
-  // Handle scroll and theme changes
   useEffect(() => {
+    console.log('App component mounted');
     const handleScroll = () => {
       const scrollPosition = window.scrollY;
       const sectionHeight = window.innerHeight * 30;
@@ -90,7 +95,10 @@ const App = () => {
     };
 
     window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    return () => {
+      console.log('App component unmounting');
+      window.removeEventListener('scroll', handleScroll);
+    };
   }, []);
 
   useEffect(() => {
