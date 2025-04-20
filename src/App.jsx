@@ -367,14 +367,13 @@ const App = () => {
           </div>
           <div className="text-center">
             <h1 className="text-2xl font-bold text-gray-800">@PotteryChicago Easter Egg Hunt</h1>
-            <p className="text-sm text-gray-600">Find hidden discounts!</p>
           </div>
           <div className="w-24"></div> {/* Spacer for balance */}
         </div>
       </header>
 
       {/* Main Content */}
-      <main className="pt-24 min-h-screen"> {/* Increased padding-top to prevent text overlap */}
+      <main className="pt-24 min-h-screen">
         <section className="container mx-auto px-4 py-4 sm:py-8">
           <p className="text-base sm:text-lg text-center mb-8 sm:mb-12 text-black px-2">
             Click on the hidden eggs to discover special discounts for pottery classes!
@@ -387,20 +386,16 @@ const App = () => {
           {elements.map(element => renderElement(element, currentTheme))}
         </div>
 
-        {/* Add Easter message at the bottom */}
-
-        <section className="container mx-auto px-4 py-4 sm:py-8">
-          <p className="text-base sm:text-lg text-center mb-8 sm:mb-12 text-black px-2">
-          You reached the bottom 🪱... don't know how but HAPPY EASTER! 
-            <br />
-            Hope to see you in the studio soon -Mike
-          </p>
-        </section>
-
+        {/* Easter message at the bottom */}
         <div className="text-center mt-32 mb-16">
           <div className="inline-block transform rotate-12">
             <FaWorm className="text-6xl text-white mx-auto mb-4" />
           </div>
+          <p className="text-white text-xl font-medium">
+            You reached the bottom... don't know how but HAPPY EASTER! 
+            <br />
+            Hope to see you in the studio soon -Mike
+          </p>
         </div>
       </main>
 
