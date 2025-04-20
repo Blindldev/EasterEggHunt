@@ -4,14 +4,10 @@ import react from '@vitejs/plugin-react'
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
-  base: process.env.NODE_ENV === 'production' ? '/EasterEggHunt/' : '/',
+  base: '/',
   server: {
     port: 5173,
-    strictPort: true,
-    headers: {
-      'Content-Type': 'application/javascript',
-      'X-Content-Type-Options': 'nosniff'
-    }
+    strictPort: true
   },
   build: {
     outDir: 'dist',
@@ -19,10 +15,6 @@ export default defineConfig({
     minify: 'terser',
     rollupOptions: {
       output: {
-        format: 'es',
-        entryFileNames: '[name].js',
-        chunkFileNames: '[name].js',
-        assetFileNames: '[name].[ext]',
         manualChunks: {
           'react-vendor': ['react', 'react-dom'],
           'framer-motion': ['framer-motion'],
