@@ -13,6 +13,7 @@ const colorThemes = [
 ];
 
 const discounts = [
+  { code: '25Pottery420', value: '$25 Handbuiling, Wheel Class or Mug!', rarity: 'common', size: 'small', link: 'https://www.thepotteryloop.com/' },
   { code: 'Wheel42050', value: '$5 off pottery wheel class', rarity: 'common', size: 'small', link: 'https://www.thepotteryloop.com/booking-calendar/potterywheel?referral=service_list_widget' },
   { code: 'Wheel918213', value: '20% off Pottery Wheel class', rarity: 'uncommon', size: 'medium', link: 'https://www.thepotteryloop.com/booking-calendar/potterywheel?referral=service_list_widget' },
   { code: 'Wheel778120', value: '$10 off pottery wheel class', rarity: 'rare', size: 'large', link: 'https://www.thepotteryloop.com/booking-calendar/potterywheel?referral=service_list_widget' },
