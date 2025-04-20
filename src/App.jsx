@@ -158,12 +158,17 @@ const App = () => {
       
       const rotation = Math.random() * 360;
       const opacity = 1; // Full opacity for eggs
-      const size = Math.random() * 40 + 5; // Reduced egg size
-      const scale = 0.2 + Math.random() * 1.2; // Reduced scale range
-      const animationDuration = 8 + Math.random() * 4; // Slower animations
+      // Adjust size distribution to favor smaller eggs
+      const size = Math.random() > 0.7 ? 
+        Math.random() * 20 + 5 : // 30% chance of tiny eggs (5-25px)
+        Math.random() > 0.5 ? 
+          Math.random() * 15 + 10 : // 35% chance of small eggs (10-25px)
+          Math.random() * 10 + 20; // 35% chance of medium eggs (20-30px)
+      const scale = 0.2 + Math.random() * 1.2;
+      const animationDuration = 8 + Math.random() * 4;
       const animationDelay = Math.random() * -5;
-      const moveRange = 5 + Math.random() * 15; // Reduced movement range
-      const rotateRange = 3 + Math.random() * 6; // Reduced rotation range
+      const moveRange = 5 + Math.random() * 15;
+      const rotateRange = 3 + Math.random() * 6;
       
       // Ensure minimum distance between eggs
       let validPosition = false;
@@ -353,8 +358,8 @@ const App = () => {
       {/* Header */}
       <header className="fixed top-0 w-full bg-white bg-opacity-90 z-10 p-2 sm:p-4 shadow-sm">
         <div className="container mx-auto px-2 sm:px-4">
-          <div className="flex flex-col sm:flex-row justify-between items-center gap-2 sm:gap-0">
-            <div className="flex gap-4 sm:gap-6">
+          <div className="flex flex-col sm:flex-row justify-center items-center gap-2 sm:gap-6">
+            <div className="flex gap-4 sm:gap-6 order-2 sm:order-1">
               <a 
                 href="https://www.instagram.com/potterychicago" 
                 target="_blank" 
@@ -374,10 +379,10 @@ const App = () => {
                 <FaGlobe className="w-5 h-5 sm:w-7 sm:h-7" />
               </a>
             </div>
-            <h1 className="text-lg sm:text-2xl font-bold text-black text-center">
+            <h1 className="text-lg sm:text-2xl font-bold text-black text-center order-1 sm:order-2">
               Pottery Chicago Easter Hunt
             </h1>
-            <div className="flex gap-4 sm:gap-6">
+            <div className="flex gap-4 sm:gap-6 order-3">
               <a 
                 href="mailto:potterchicago@gmail.com?subject=Easter Egg Pottery Question" 
                 className="text-gray-700 hover:text-red-500 transition-colors duration-300"
