@@ -376,12 +376,9 @@ const App = () => {
       {/* Main Content */}
       <main className="pt-24 min-h-screen"> {/* Increased padding-top to prevent text overlap */}
         <section className="container mx-auto px-4 py-4 sm:py-8">
-          <h2 className="text-2xl sm:text-4xl font-bold text-center mb-4 sm:mb-8 text-black">
-            Find Hidden Easter Eggs!
-          </h2>
           <p className="text-base sm:text-lg text-center mb-8 sm:mb-12 text-black px-2">
             Click on the hidden eggs to discover special discounts for pottery classes!
-            Valid for 48 hours only.
+            Codes valid for 48 hours only.
           </p>
         </section>
 
@@ -391,15 +388,19 @@ const App = () => {
         </div>
 
         {/* Add Easter message at the bottom */}
+
+        <section className="container mx-auto px-4 py-4 sm:py-8">
+          <p className="text-base sm:text-lg text-center mb-8 sm:mb-12 text-black px-2">
+          You reached the bottom 🪱... don't know how but HAPPY EASTER! 
+            <br />
+            Hope to see you in the studio soon -Mike
+          </p>
+        </section>
+
         <div className="text-center mt-32 mb-16">
           <div className="inline-block transform rotate-12">
             <FaWorm className="text-6xl text-white mx-auto mb-4" />
           </div>
-          <p className="text-white text-xl font-medium">
-            You reached the bottom... don't know how but HAPPY EASTER! 
-            <br />
-            Hope to see you in the studio soon -Mike
-          </p>
         </div>
       </main>
 
