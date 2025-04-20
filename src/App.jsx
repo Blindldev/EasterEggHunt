@@ -343,47 +343,29 @@ const App = () => {
       }}
     >
       {/* Header */}
-      <header className="fixed top-0 w-full bg-white bg-opacity-90 z-10 p-2 sm:p-4 shadow-sm">
-        <div className="container mx-auto px-2 sm:px-4">
-          <div className="flex flex-col sm:flex-row justify-center items-center gap-2 sm:gap-6">
-            <div className="flex gap-4 sm:gap-6 order-2 sm:order-1">
-              <a 
-                href="https://www.instagram.com/potterychicago" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="text-gray-700 hover:text-pink-500 transition-colors duration-300"
-                title="Follow us on Instagram"
-              >
-                <FaInstagram className="w-5 h-5 sm:w-7 sm:h-7" />
-              </a>
-              <a 
-                href="https://thepotteryloop.com" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="text-gray-700 hover:text-blue-500 transition-colors duration-300"
-                title="Visit our website"
-              >
-                <FaGlobe className="w-5 h-5 sm:w-7 sm:h-7" />
-              </a>
-            </div>
-            <h1 className="text-lg sm:text-2xl font-bold text-black text-center order-1 sm:order-2 w-full sm:w-auto">
-              @PotteryChicago Easter Egg Hunt {/* Force rebuild */}
-            </h1>
-            <div className="flex gap-4 sm:gap-6 order-3">
-              <a 
-                href="mailto:potterchicago@gmail.com?subject=Easter Egg Pottery Question" 
-                className="text-gray-700 hover:text-red-500 transition-colors duration-300"
-                title="Contact us"
-              >
-                <FaEnvelope className="w-5 h-5 sm:w-7 sm:h-7" />
-              </a>
-            </div>
+      <header className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-sm shadow-sm">
+        <div className="container mx-auto px-4 py-3 flex justify-between items-center">
+          <div className="flex items-center space-x-4">
+            <a href="https://www.instagram.com/thepotteryloop/" target="_blank" rel="noopener noreferrer" className="text-gray-700 hover:text-gray-900 transition-colors">
+              <FaInstagram className="text-xl" />
+            </a>
+            <a href="https://thepotteryloop.com" target="_blank" rel="noopener noreferrer" className="text-gray-700 hover:text-gray-900 transition-colors">
+              <FaGlobe className="text-xl" />
+            </a>
+            <a href="mailto:info@thepotteryloop.com" className="text-gray-700 hover:text-gray-900 transition-colors">
+              <FaEnvelope className="text-xl" />
+            </a>
           </div>
+          <div className="text-center">
+            <h1 className="text-2xl font-bold text-gray-800">Easter Egg Hunt</h1>
+            <p className="text-sm text-gray-600">Find hidden discounts!</p>
+          </div>
+          <div className="w-24"></div> {/* Spacer for balance */}
         </div>
       </header>
 
       {/* Main Content */}
-      <main className="pt-16 sm:pt-20">
+      <main className="pt-16 min-h-screen"> {/* Added padding-top to account for fixed header */}
         <section className="container mx-auto px-4 py-4 sm:py-8">
           <h2 className="text-2xl sm:text-4xl font-bold text-center mb-4 sm:mb-8 text-black">
             Find Hidden Easter Eggs!
