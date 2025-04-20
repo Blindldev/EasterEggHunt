@@ -96,8 +96,8 @@ const App = () => {
     const pageHeight = 100000;
     const elements = [];
     
-    // Increase decorative elements to 22500 (5x more)
-    for (let i = 0; i < 22500; i++) {
+    // Increase decorative elements to 15000 (3x more)
+    for (let i = 0; i < 15000; i++) {
       const type = Math.random() > 0.7 ? 'leaf' : 
                   Math.random() > 0.6 ? 'plant' : 
                   Math.random() > 0.5 ? 'mountain' : 
@@ -171,8 +171,8 @@ const App = () => {
       }
     });
 
-    // Increase number of discount eggs by 5x
-    const totalDiscountEggs = Math.floor(discounts.length * 5);
+    // Increase number of discount eggs by 3x
+    const totalDiscountEggs = Math.floor(discounts.length * 3);
     const extraDiscountEggs = Array(totalDiscountEggs - discounts.length).fill(null).map(() => {
       const randomDiscount = discounts[Math.floor(Math.random() * discounts.length)];
       return {
@@ -181,8 +181,8 @@ const App = () => {
       };
     });
 
-    // Keep spoiled eggs proportional (5x)
-    const totalSpoiledEggs = Math.floor(spoiledEggs.length * 5);
+    // Keep spoiled eggs proportional (3x)
+    const totalSpoiledEggs = Math.floor(spoiledEggs.length * 3);
     const extraSpoiledEggs = Array(totalSpoiledEggs - spoiledEggs.length).fill(null).map(() => ({
       type: 'spoiled',
       message: 'Just clay! Try again!',
@@ -357,7 +357,7 @@ const App = () => {
             </a>
           </div>
           <div className="text-center">
-            <h1 className="text-2xl font-bold text-gray-800">Easter Egg Hunt</h1>
+            <h1 className="text-2xl font-bold text-gray-800">@PotteryChicago Easter Egg Hunt</h1>
             <p className="text-sm text-gray-600">Find hidden discounts!</p>
           </div>
           <div className="w-24"></div> {/* Spacer for balance */}
@@ -365,7 +365,7 @@ const App = () => {
       </header>
 
       {/* Main Content */}
-      <main className="pt-16 min-h-screen"> {/* Added padding-top to account for fixed header */}
+      <main className="pt-24 min-h-screen"> {/* Increased padding-top to prevent text overlap */}
         <section className="container mx-auto px-4 py-4 sm:py-8">
           <h2 className="text-2xl sm:text-4xl font-bold text-center mb-4 sm:mb-8 text-black">
             Find Hidden Easter Eggs!
