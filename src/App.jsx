@@ -96,8 +96,8 @@ const App = () => {
     const pageHeight = 100000;
     const elements = [];
     
-    // Increase decorative elements to 15000 (3x more)
-    for (let i = 0; i < 15000; i++) {
+    // Increase decorative elements to 5000 (reduced from 15000)
+    for (let i = 0; i < 5000; i++) {
       const type = Math.random() > 0.7 ? 'leaf' : 
                   Math.random() > 0.6 ? 'plant' : 
                   Math.random() > 0.5 ? 'mountain' : 
@@ -105,7 +105,8 @@ const App = () => {
                   Math.random() > 0.3 ? 'cloud' :
                   Math.random() > 0.2 ? 'circle' : 'star';
       
-      const size = Math.random() * 30 + 5; // 5-35px size
+      // Increase the base size and make more elements larger
+      const size = Math.random() > 0.3 ? Math.random() * 40 + 20 : Math.random() * 20 + 5; // 20-60px for 70% of elements, 5-25px for 30%
       const opacity = 0.8 + Math.random() * 0.2;
       const rotation = Math.random() * 360;
       const scale = 0.2 + Math.random() * 1.2;
@@ -171,8 +172,8 @@ const App = () => {
       }
     });
 
-    // Increase number of discount eggs by 3x
-    const totalDiscountEggs = Math.floor(discounts.length * 3);
+    // Increase number of discount eggs to 45 (3x more)
+    const totalDiscountEggs = Math.floor(discounts.length * 7.5); // 6 * 7.5 = 45
     const extraDiscountEggs = Array(totalDiscountEggs - discounts.length).fill(null).map(() => {
       const randomDiscount = discounts[Math.floor(Math.random() * discounts.length)];
       return {
@@ -181,7 +182,7 @@ const App = () => {
       };
     });
 
-    // Keep spoiled eggs proportional (3x)
+    // Keep spoiled eggs at 15 (3x)
     const totalSpoiledEggs = Math.floor(spoiledEggs.length * 3);
     const extraSpoiledEggs = Array(totalSpoiledEggs - spoiledEggs.length).fill(null).map(() => ({
       type: 'spoiled',
