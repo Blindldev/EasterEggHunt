@@ -391,9 +391,9 @@ const App = () => {
         {/* Easter message at the bottom */}
         <div className="text-center mt-32 mb-16">
           <div className="inline-block transform rotate-12">
-            <FaSeedling className="text-6xl text-white mx-auto mb-4" />
+            <FaSeedling className="text-6xl text-gray-600 mx-auto mb-4" />
           </div>
-          <p className="text-white text-xl font-medium">
+          <p className="text-gray-600 text-xl font-medium">
             You reached the bottom... don't know how but HAPPY EASTER! 
             <br />
             Hope to see you in the studio soon -Mike
