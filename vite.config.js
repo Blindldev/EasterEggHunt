@@ -9,7 +9,8 @@ export default defineConfig({
     port: 5173,
     strictPort: true,
     headers: {
-      'Content-Type': 'application/javascript'
+      'Content-Type': 'application/javascript',
+      'X-Content-Type-Options': 'nosniff'
     }
   },
   build: {
@@ -19,6 +20,9 @@ export default defineConfig({
     rollupOptions: {
       output: {
         format: 'es',
+        entryFileNames: '[name].js',
+        chunkFileNames: '[name].js',
+        assetFileNames: '[name].[ext]',
         manualChunks: {
           'react-vendor': ['react', 'react-dom'],
           'framer-motion': ['framer-motion'],
