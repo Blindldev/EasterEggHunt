@@ -11,6 +11,10 @@ export default defineConfig({
     minify: 'terser',
     rollupOptions: {
       output: {
+        format: 'es',
+        entryFileNames: 'assets/[name].js',
+        chunkFileNames: 'assets/[name].js',
+        assetFileNames: 'assets/[name].[ext]',
         manualChunks: {
           'react-vendor': ['react', 'react-dom'],
           'framer-motion': ['framer-motion'],
@@ -21,6 +25,9 @@ export default defineConfig({
   },
   server: {
     port: 5173,
-    strictPort: true
+    strictPort: true,
+    headers: {
+      'Content-Type': 'application/javascript'
+    }
   }
 }) 
