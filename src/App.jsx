@@ -167,8 +167,8 @@ const App = () => {
       }
     });
 
-    // Increase number of discount eggs by 50%
-    const totalDiscountEggs = Math.floor(discounts.length * 1.5);
+    // Increase number of discount eggs by 2x
+    const totalDiscountEggs = Math.floor(discounts.length * 2);
     const extraDiscountEggs = Array(totalDiscountEggs - discounts.length).fill(null).map(() => {
       const randomDiscount = discounts[Math.floor(Math.random() * discounts.length)];
       return {
@@ -177,9 +177,9 @@ const App = () => {
       };
     });
 
-    // Keep spoiled eggs the same
-    const totalEggs = totalDiscountEggs + spoiledEggs.length;
-    const extraSpoiledEggs = Array(spoiledEggs.length).fill(null).map(() => ({
+    // Keep spoiled eggs proportional to maintain challenge
+    const totalSpoiledEggs = Math.floor(spoiledEggs.length * 2);
+    const extraSpoiledEggs = Array(totalSpoiledEggs - spoiledEggs.length).fill(null).map(() => ({
       type: 'spoiled',
       message: 'Just clay! Try again!',
       size: Math.random() > 0.5 ? 'medium' : 'small'
@@ -188,12 +188,12 @@ const App = () => {
     // Add remaining eggs with optimized positioning
     [...discounts.filter(d => d.code !== 'POTTERY5'), ...extraDiscountEggs, ...spoiledEggs, ...extraSpoiledEggs].forEach((item, index) => {
       // Calculate position based on index to ensure even distribution
-      const sectionWidth = window.innerWidth / 4; // Divide page into 4 vertical sections
-      const sectionHeight = pageHeight / 4; // Divide page into 4 horizontal sections
+      const sectionWidth = window.innerWidth / 6; // Divide page into 6 vertical sections
+      const sectionHeight = pageHeight / 6; // Divide page into 6 horizontal sections
       
-      const sectionIndex = index % 16; // 16 sections total (4x4 grid)
-      const row = Math.floor(sectionIndex / 4);
-      const col = sectionIndex % 4;
+      const sectionIndex = index % 36; // 36 sections total (6x6 grid)
+      const row = Math.floor(sectionIndex / 6);
+      const col = sectionIndex % 6;
       
       // Add some randomness within each section
       const top = (row * sectionHeight) + (Math.random() * sectionHeight * 0.8);
@@ -227,7 +227,7 @@ const App = () => {
               Math.pow(finalTop - existingElement.position.top, 2) +
               Math.pow(finalLeft - existingElement.position.left, 2)
             );
-            if (distance < 150) { // Reduced minimum distance between eggs
+            if (distance < 100) { // Reduced minimum distance between eggs
               validPosition = false;
               // Try a new random position within the same section
               finalTop = (row * sectionHeight) + (Math.random() * sectionHeight * 0.8);
