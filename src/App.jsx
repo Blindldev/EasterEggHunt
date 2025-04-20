@@ -19,7 +19,7 @@ const discounts = [
   { code: 'WHEEL10', value: '$10 off pottery wheel class', rarity: 'common', size: 'medium' },
   { code: 'CLASS25', value: '25% off any class', rarity: 'uncommon', size: 'small' },
   { code: 'CLASS10', value: '10% off any class', rarity: 'common', size: 'medium' },
-  { code: 'FREEGLAZE', value: 'Free Glazing', rarity: 'legendary', size: 'tiny' },
+  { code: 'HAND10', value: '$10 off $25 Handbuilding class', rarity: 'common', size: 'medium' },
 ];
 
 const spoiledEggs = Array(30).fill(null).map(() => ({
@@ -97,7 +97,7 @@ const App = () => {
     const elements = [];
     
     // Add even more decorative elements with enhanced variety and animations
-    for (let i = 0; i < 3000; i++) {
+    for (let i = 0; i < 4000; i++) {
       const type = Math.random() > 0.7 ? 'leaf' : 
                   Math.random() > 0.6 ? 'plant' : 
                   Math.random() > 0.5 ? 'mountain' : 
@@ -133,9 +133,18 @@ const App = () => {
 
     // Add eggs with completely random positioning
     [...discounts, ...spoiledEggs].forEach((item, index) => {
-      // Completely random positioning without sections
-      const top = Math.random() * pageHeight;
-      const left = Math.random() * (window.innerWidth - 100) + 50;
+      // Calculate position based on index to ensure even distribution
+      const sectionWidth = window.innerWidth / 3; // Divide page into 3 vertical sections
+      const sectionHeight = pageHeight / 3; // Divide page into 3 horizontal sections
+      
+      const sectionIndex = index % 9; // 9 sections total (3x3 grid)
+      const row = Math.floor(sectionIndex / 3);
+      const col = sectionIndex % 3;
+      
+      // Add some randomness within each section
+      const top = (row * sectionHeight) + (Math.random() * sectionHeight * 0.8);
+      const left = (col * sectionWidth) + (Math.random() * sectionWidth * 0.8);
+      
       const rotation = Math.random() * 360;
       const opacity = 1; // Full opacity for eggs
       const size = Math.random() * 60 + 5;
@@ -161,8 +170,9 @@ const App = () => {
             );
             if (distance < 200) { // Minimum 200px between eggs
               validPosition = false;
-              finalTop = Math.random() * pageHeight;
-              finalLeft = Math.random() * (window.innerWidth - 100) + 50;
+              // Try a new random position within the same section
+              finalTop = (row * sectionHeight) + (Math.random() * sectionHeight * 0.8);
+              finalLeft = (col * sectionWidth) + (Math.random() * sectionWidth * 0.8);
               attempts++;
               break;
             }
@@ -333,33 +343,36 @@ const App = () => {
       <header className="fixed top-0 w-full bg-white bg-opacity-90 z-10 p-4 shadow-sm">
         <div className="container mx-auto">
           <div className="flex justify-between items-center">
-            <div className="flex gap-4">
+            <div className="flex gap-6">
               <a 
                 href="https://www.instagram.com/potterychicago" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="text-gray-700 hover:text-gray-900 transition-colors"
+                className="text-gray-700 hover:text-pink-500 transition-colors duration-300"
+                title="Follow us on Instagram"
               >
-                <FaInstagram className="w-6 h-6" />
+                <FaInstagram className="w-7 h-7" />
               </a>
               <a 
                 href="https://thepotteryloop.com" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="text-gray-700 hover:text-gray-900 transition-colors"
+                className="text-gray-700 hover:text-blue-500 transition-colors duration-300"
+                title="Visit our website"
               >
-                <FaGlobe className="w-6 h-6" />
+                <FaGlobe className="w-7 h-7" />
               </a>
             </div>
             <h1 className="text-2xl font-bold text-black">
               Pottery Chicago Easter Hunt
             </h1>
-            <div className="flex gap-4">
+            <div className="flex gap-6">
               <a 
                 href="mailto:potterchicago@gmail.com?subject=Easter Egg Pottery Question" 
-                className="text-gray-700 hover:text-gray-900 transition-colors"
+                className="text-gray-700 hover:text-red-500 transition-colors duration-300"
+                title="Contact us"
               >
-                <FaEnvelope className="w-6 h-6" />
+                <FaEnvelope className="w-7 h-7" />
               </a>
             </div>
           </div>
