@@ -96,8 +96,8 @@ const App = () => {
     const pageHeight = 100000;
     const elements = [];
     
-    // Further reduce decorative elements and optimize animations for mobile
-    for (let i = 0; i < 1500; i++) { // Reduced from 2500 to 1500
+    // Increase decorative elements to 4500 (3x more)
+    for (let i = 0; i < 4500; i++) {
       const type = Math.random() > 0.7 ? 'leaf' : 
                   Math.random() > 0.6 ? 'plant' : 
                   Math.random() > 0.5 ? 'mountain' : 
@@ -105,14 +105,17 @@ const App = () => {
                   Math.random() > 0.3 ? 'cloud' :
                   Math.random() > 0.2 ? 'circle' : 'star';
       
-      const size = Math.random() * 30 + 5; // Further reduced max size (5-35px)
+      const size = Math.random() * 30 + 5; // 5-35px size
       const opacity = 0.8 + Math.random() * 0.2;
       const rotation = Math.random() * 360;
-      const scale = 0.2 + Math.random() * 1.2; // Further reduced scale range
-      const animationDuration = 8 + Math.random() * 4; // Even slower animations (8-12s)
-      const animationDelay = Math.random() * -5;
-      const moveRange = 5 + Math.random() * 15; // Further reduced movement range
-      const rotateRange = 3 + Math.random() * 6; // Further reduced rotation range
+      const scale = 0.2 + Math.random() * 1.2;
+      
+      // Only 25% of elements will be animated
+      const isAnimated = Math.random() < 0.25;
+      const animationDuration = isAnimated ? 8 + Math.random() * 4 : 0; // 8-12s or no animation
+      const animationDelay = isAnimated ? Math.random() * -5 : 0;
+      const moveRange = isAnimated ? 5 + Math.random() * 15 : 0;
+      const rotateRange = isAnimated ? 3 + Math.random() * 6 : 0;
       
       elements.push({
         id: `decor-${i}`,
@@ -128,7 +131,8 @@ const App = () => {
           animationDuration,
           animationDelay,
           moveRange,
-          rotateRange
+          rotateRange,
+          isAnimated
         }
       });
     }
@@ -141,8 +145,7 @@ const App = () => {
       size: 'medium'
     };
 
-    // Add guaranteed egg first
-    const topSectionHeight = pageHeight * 0.1; // Top 10% of the page
+    const topSectionHeight = pageHeight * 0.1;
     const topSectionWidth = window.innerWidth;
     
     const guaranteedTop = Math.random() * topSectionHeight;
@@ -159,16 +162,17 @@ const App = () => {
         rotation: Math.random() * 360,
         scale: 0.8 + Math.random() * 0.4,
         opacity: 1,
-        size: 20 + Math.random() * 10, // Medium size (20-30px)
+        size: 20 + Math.random() * 10,
         animationDuration: 8 + Math.random() * 4,
         animationDelay: Math.random() * -5,
         moveRange: 5 + Math.random() * 15,
-        rotateRange: 3 + Math.random() * 6
+        rotateRange: 3 + Math.random() * 6,
+        isAnimated: true // Guaranteed egg is always animated
       }
     });
 
-    // Increase number of discount eggs by 2x
-    const totalDiscountEggs = Math.floor(discounts.length * 2);
+    // Increase number of discount eggs by 3x
+    const totalDiscountEggs = Math.floor(discounts.length * 3);
     const extraDiscountEggs = Array(totalDiscountEggs - discounts.length).fill(null).map(() => {
       const randomDiscount = discounts[Math.floor(Math.random() * discounts.length)];
       return {
@@ -177,8 +181,8 @@ const App = () => {
       };
     });
 
-    // Keep spoiled eggs proportional to maintain challenge
-    const totalSpoiledEggs = Math.floor(spoiledEggs.length * 2);
+    // Keep spoiled eggs proportional (3x)
+    const totalSpoiledEggs = Math.floor(spoiledEggs.length * 3);
     const extraSpoiledEggs = Array(totalSpoiledEggs - spoiledEggs.length).fill(null).map(() => ({
       type: 'spoiled',
       message: 'Just clay! Try again!',
@@ -187,81 +191,41 @@ const App = () => {
 
     // Add remaining eggs with optimized positioning
     [...discounts.filter(d => d.code !== 'POTTERY5'), ...extraDiscountEggs, ...spoiledEggs, ...extraSpoiledEggs].forEach((item, index) => {
-      // Calculate position based on index to ensure even distribution
-      const sectionWidth = window.innerWidth / 6; // Divide page into 6 vertical sections
-      const sectionHeight = pageHeight / 6; // Divide page into 6 horizontal sections
+      const sectionWidth = window.innerWidth / 6;
+      const sectionHeight = pageHeight / 6;
       
-      const sectionIndex = index % 36; // 36 sections total (6x6 grid)
+      const sectionIndex = index % 36;
       const row = Math.floor(sectionIndex / 6);
       const col = sectionIndex % 6;
       
-      // Add some randomness within each section
       const top = (row * sectionHeight) + (Math.random() * sectionHeight * 0.8);
       const left = (col * sectionWidth) + (Math.random() * sectionWidth * 0.8);
       
-      const rotation = Math.random() * 360;
-      const opacity = 1; // Full opacity for eggs
-      // Adjust size distribution to favor smaller eggs
-      const size = Math.random() > 0.7 ? 
-        Math.random() * 20 + 5 : // 30% chance of tiny eggs (5-25px)
-        Math.random() > 0.5 ? 
-          Math.random() * 15 + 10 : // 35% chance of small eggs (10-25px)
-          Math.random() * 10 + 20; // 35% chance of medium eggs (20-30px)
-      const scale = 0.2 + Math.random() * 1.2;
-      const animationDuration = 8 + Math.random() * 4;
-      const animationDelay = Math.random() * -5;
-      const moveRange = 5 + Math.random() * 15;
-      const rotateRange = 3 + Math.random() * 6;
-      
-      // Ensure minimum distance between eggs
-      let validPosition = false;
-      let attempts = 0;
-      let finalTop = top;
-      let finalLeft = left;
-      
-      while (!validPosition && attempts < 10) {
-        validPosition = true;
-        for (const existingElement of elements) {
-          if (existingElement.isEgg) {
-            const distance = Math.sqrt(
-              Math.pow(finalTop - existingElement.position.top, 2) +
-              Math.pow(finalLeft - existingElement.position.left, 2)
-            );
-            if (distance < 100) { // Reduced minimum distance between eggs
-              validPosition = false;
-              // Try a new random position within the same section
-              finalTop = (row * sectionHeight) + (Math.random() * sectionHeight * 0.8);
-              finalLeft = (col * sectionWidth) + (Math.random() * sectionWidth * 0.8);
-              attempts++;
-              break;
-            }
-          }
-        }
-      }
+      // Only 25% of eggs will be animated
+      const isAnimated = Math.random() < 0.25;
       
       elements.push({
-        id: item.code || `spoiled-${index}`,
+        id: `egg-${index}`,
         type: 'egg',
         isEgg: true,
         item,
         position: {
-          top: finalTop,
-          left: finalLeft,
-          rotation,
-          scale,
-          opacity,
-          size,
-          animationDuration,
-          animationDelay,
-          moveRange,
-          rotateRange
+          top,
+          left,
+          rotation: Math.random() * 360,
+          scale: 0.8 + Math.random() * 0.4,
+          opacity: 0.8 + Math.random() * 0.2,
+          size: item.size === 'small' ? 15 + Math.random() * 5 : 20 + Math.random() * 10,
+          animationDuration: isAnimated ? 8 + Math.random() * 4 : 0,
+          animationDelay: isAnimated ? Math.random() * -5 : 0,
+          moveRange: isAnimated ? 5 + Math.random() * 15 : 0,
+          rotateRange: isAnimated ? 3 + Math.random() * 6 : 0,
+          isAnimated
         }
       });
     });
 
-    // Shuffle all elements for more randomness
-    const shuffledElements = elements.sort(() => Math.random() - 0.5);
-    setElements(shuffledElements);
+    setElements(elements);
   }, []);
 
   const handleEggClick = (e, item) => {
@@ -282,50 +246,58 @@ const App = () => {
   };
 
   const renderElement = (element, theme) => {
-    if (element.isEgg) {
+    const { type, position, isEgg } = element;
+    const style = {
+      position: 'absolute',
+      top: `${position.top}px`,
+      left: `${position.left}px`,
+      fontSize: `${position.size}px`,
+      opacity: position.opacity,
+      color: isEgg ? theme.primary : theme.secondary,
+      transform: `rotate(${position.rotation}deg) scale(${position.scale})`,
+      transition: 'color 0.5s ease',
+      cursor: isEgg ? 'pointer' : 'default',
+      mixBlendMode: 'multiply',
+    };
+
+    const variants = position.isAnimated ? {
+      animate: {
+        y: [`${-position.moveRange}px`, `${position.moveRange}px`],
+        rotate: [position.rotation - position.rotateRange, position.rotation + position.rotateRange],
+        transition: {
+          y: {
+            duration: position.animationDuration,
+            repeat: Infinity,
+            repeatType: 'reverse',
+            ease: 'easeInOut',
+            delay: position.animationDelay,
+          },
+          rotate: {
+            duration: position.animationDuration * 1.2,
+            repeat: Infinity,
+            repeatType: 'reverse',
+            ease: 'easeInOut',
+            delay: position.animationDelay,
+          },
+        },
+      },
+    } : {};
+
+    if (isEgg) {
       const isSpoiled = element.item.type === 'spoiled';
       
       return (
         <motion.div
           key={element.id}
           className={`egg absolute ${showDevMode ? 'ring-2 ring-red-500' : ''}`}
-          style={{
-            position: 'absolute',
-            top: `${element.position.top}px`,
-            left: `${element.position.left}px`,
-            width: `${element.position.size}px`,
-            height: `${element.position.size}px`,
-            transform: `rotate(${element.position.rotation}deg) scale(${element.position.scale})`,
-            opacity: element.position.opacity,
-            zIndex: 2,
-            cursor: 'pointer',
-            mixBlendMode: 'normal',
-            color: theme.primary,
-            filter: 'drop-shadow(0 0 2px rgba(0,0,0,0.3))',
-            WebkitFilter: 'drop-shadow(0 0 2px rgba(0,0,0,0.3))'
-          }}
+          style={style}
           onClick={(e) => handleEggClick(e, element.item)}
           whileHover={{ scale: 1.2, rotate: 5 }}
           whileTap={{ scale: 0.9 }}
-          animate={{
-            y: [0, -element.position.moveRange, 0],
-            x: [-element.position.moveRange/2, element.position.moveRange/2, -element.position.moveRange/2],
-            rotate: [
-              element.position.rotation,
-              element.position.rotation + element.position.rotateRange,
-              element.position.rotation - element.position.rotateRange,
-              element.position.rotation
-            ],
-            scale: [
-              element.position.scale,
-              element.position.scale * 1.2,
-              element.position.scale * 0.9,
-              element.position.scale
-            ],
-          }}
+          animate={variants.animate}
           transition={{
-            duration: element.position.animationDuration,
-            delay: element.position.animationDelay,
+            duration: position.animationDuration,
+            delay: position.animationDelay,
             repeat: Infinity,
             ease: "easeInOut"
           }}
@@ -343,45 +315,17 @@ const App = () => {
       cloud: FaCloud,
       circle: FaCircle,
       star: FaStar
-    }[element.type];
+    }[type];
 
     return (
       <motion.div
         key={element.id}
         className="absolute"
-        style={{
-          position: 'absolute',
-          top: `${element.position.top}px`,
-          left: `${element.position.left}px`,
-          transform: `rotate(${element.position.rotation}deg) scale(${element.position.scale})`,
-          opacity: element.position.opacity,
-          zIndex: 1,
-          width: `${element.position.size}px`,
-          height: `${element.position.size}px`,
-          mixBlendMode: 'normal',
-          color: theme.primary,
-          filter: 'drop-shadow(0 0 2px rgba(0,0,0,0.3))',
-          WebkitFilter: 'drop-shadow(0 0 2px rgba(0,0,0,0.3))'
-        }}
-        animate={{
-          y: [0, -element.position.moveRange, 0],
-          x: [-element.position.moveRange/2, element.position.moveRange/2, -element.position.moveRange/2],
-          rotate: [
-            element.position.rotation,
-            element.position.rotation + element.position.rotateRange,
-            element.position.rotation - element.position.rotateRange,
-            element.position.rotation
-          ],
-          scale: [
-            element.position.scale,
-            element.position.scale * 1.2,
-            element.position.scale * 0.9,
-            element.position.scale
-          ],
-        }}
+        style={style}
+        animate={variants.animate}
         transition={{
-          duration: element.position.animationDuration,
-          delay: element.position.animationDelay,
+          duration: position.animationDuration,
+          delay: position.animationDelay,
           repeat: Infinity,
           ease: "easeInOut"
         }}
