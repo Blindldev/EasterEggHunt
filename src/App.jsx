@@ -96,8 +96,8 @@ const App = () => {
     const pageHeight = 100000;
     const elements = [];
     
-    // Increase decorative elements to 4500 (3x more)
-    for (let i = 0; i < 4500; i++) {
+    // Increase decorative elements to 22500 (5x more)
+    for (let i = 0; i < 22500; i++) {
       const type = Math.random() > 0.7 ? 'leaf' : 
                   Math.random() > 0.6 ? 'plant' : 
                   Math.random() > 0.5 ? 'mountain' : 
@@ -110,8 +110,8 @@ const App = () => {
       const rotation = Math.random() * 360;
       const scale = 0.2 + Math.random() * 1.2;
       
-      // Only 25% of elements will be animated
-      const isAnimated = Math.random() < 0.25;
+      // Only 20% of elements will be animated
+      const isAnimated = Math.random() < 0.2;
       const animationDuration = isAnimated ? 8 + Math.random() * 4 : 0; // 8-12s or no animation
       const animationDelay = isAnimated ? Math.random() * -5 : 0;
       const moveRange = isAnimated ? 5 + Math.random() * 15 : 0;
@@ -171,8 +171,8 @@ const App = () => {
       }
     });
 
-    // Increase number of discount eggs by 3x
-    const totalDiscountEggs = Math.floor(discounts.length * 3);
+    // Increase number of discount eggs by 5x
+    const totalDiscountEggs = Math.floor(discounts.length * 5);
     const extraDiscountEggs = Array(totalDiscountEggs - discounts.length).fill(null).map(() => {
       const randomDiscount = discounts[Math.floor(Math.random() * discounts.length)];
       return {
@@ -181,8 +181,8 @@ const App = () => {
       };
     });
 
-    // Keep spoiled eggs proportional (3x)
-    const totalSpoiledEggs = Math.floor(spoiledEggs.length * 3);
+    // Keep spoiled eggs proportional (5x)
+    const totalSpoiledEggs = Math.floor(spoiledEggs.length * 5);
     const extraSpoiledEggs = Array(totalSpoiledEggs - spoiledEggs.length).fill(null).map(() => ({
       type: 'spoiled',
       message: 'Just clay! Try again!',
@@ -201,8 +201,8 @@ const App = () => {
       const top = (row * sectionHeight) + (Math.random() * sectionHeight * 0.8);
       const left = (col * sectionWidth) + (Math.random() * sectionWidth * 0.8);
       
-      // Only 25% of eggs will be animated
-      const isAnimated = Math.random() < 0.25;
+      // Only 20% of eggs will be animated
+      const isAnimated = Math.random() < 0.2;
       
       elements.push({
         id: `egg-${index}`,
