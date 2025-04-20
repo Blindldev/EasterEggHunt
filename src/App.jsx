@@ -423,7 +423,7 @@ const App = () => {
               </a>
             </div>
             <h1 className="text-lg sm:text-2xl font-bold text-black text-center order-1 sm:order-2 w-full sm:w-auto">
-              @PotteryChicago Easter Egg Hunt
+              @PotteryChicago Easter Egg Hunt {/* Force rebuild */}
             </h1>
             <div className="flex gap-4 sm:gap-6 order-3">
               <a 

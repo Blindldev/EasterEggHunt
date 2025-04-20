@@ -7,7 +7,17 @@ export default defineConfig({
   base: '/EasterEggHunt/',
   build: {
     outDir: 'dist',
-    sourcemap: true,
+    sourcemap: false,
+    minify: 'terser',
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          'react-vendor': ['react', 'react-dom'],
+          'framer-motion': ['framer-motion'],
+          'react-icons': ['react-icons']
+        }
+      }
+    }
   },
   server: {
     port: 5173,
