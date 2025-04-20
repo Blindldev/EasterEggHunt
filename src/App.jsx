@@ -96,8 +96,8 @@ const App = () => {
     const pageHeight = 100000;
     const elements = [];
     
-    // Add even more decorative elements with enhanced variety and animations
-    for (let i = 0; i < 4000; i++) {
+    // Reduce number of decorative elements and optimize animations for mobile
+    for (let i = 0; i < 2500; i++) { // Reduced from 4000 to 2500
       const type = Math.random() > 0.7 ? 'leaf' : 
                   Math.random() > 0.6 ? 'plant' : 
                   Math.random() > 0.5 ? 'mountain' : 
@@ -105,12 +105,14 @@ const App = () => {
                   Math.random() > 0.3 ? 'cloud' :
                   Math.random() > 0.2 ? 'circle' : 'star';
       
-      const size = Math.random() * 60 + 5; // More varied sizes (5-65px)
-      const opacity = 0.8 + Math.random() * 0.2; // Much higher opacity
+      const size = Math.random() * 40 + 5; // Reduced max size (5-45px)
+      const opacity = 0.8 + Math.random() * 0.2;
       const rotation = Math.random() * 360;
-      const scale = 0.2 + Math.random() * 2.5; // More varied scale
-      const animationDuration = 3 + Math.random() * 7; // Random duration between 3-10s
-      const animationDelay = Math.random() * -5; // Random start time
+      const scale = 0.2 + Math.random() * 1.5; // Reduced scale range
+      const animationDuration = 5 + Math.random() * 5; // Slower animations (5-10s)
+      const animationDelay = Math.random() * -5;
+      const moveRange = 10 + Math.random() * 20; // Reduced movement range
+      const rotateRange = 5 + Math.random() * 10; // Reduced rotation range
       
       elements.push({
         id: `decor-${i}`,
@@ -125,14 +127,23 @@ const App = () => {
           size,
           animationDuration,
           animationDelay,
-          moveRange: 20 + Math.random() * 40, // Random movement range
-          rotateRange: 10 + Math.random() * 20 // Random rotation range
+          moveRange,
+          rotateRange
         }
       });
     }
 
-    // Add eggs with completely random positioning
-    [...discounts, ...spoiledEggs].forEach((item, index) => {
+    // Increase number of eggs by 10%
+    const totalEggs = Math.floor((discounts.length + spoiledEggs.length) * 1.1);
+    const additionalEggs = totalEggs - (discounts.length + spoiledEggs.length);
+    const extraSpoiledEggs = Array(additionalEggs).fill(null).map(() => ({
+      type: 'spoiled',
+      message: 'Just clay! Try again!',
+      size: Math.random() > 0.5 ? 'medium' : 'small'
+    }));
+
+    // Add eggs with optimized positioning
+    [...discounts, ...spoiledEggs, ...extraSpoiledEggs].forEach((item, index) => {
       // Calculate position based on index to ensure even distribution
       const sectionWidth = window.innerWidth / 3; // Divide page into 3 vertical sections
       const sectionHeight = pageHeight / 3; // Divide page into 3 horizontal sections
