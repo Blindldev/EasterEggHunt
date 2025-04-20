@@ -7,7 +7,12 @@ export default defineConfig({
   base: '/EasterEggHunt/',
   build: {
     outDir: 'dist',
-    sourcemap: true
+    emptyOutDir: true,
+    rollupOptions: {
+      input: {
+        main: './index.html'
+      }
+    }
   },
   server: {
     port: 5173,
