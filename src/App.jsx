@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FaEgg, FaLeaf, FaSeedling, FaMountain, FaWater, FaCloud, FaCircle, FaSquare, FaStar, FaTimes, FaCheck, FaInstagram, FaGlobe, FaEnvelope } from 'react-icons/fa';
+import { FaEgg, FaLeaf, FaSeedling, FaMountain, FaWater, FaCloud, FaCircle, FaSquare, FaStar, FaTimes, FaCheck, FaInstagram, FaGlobe, FaEnvelope, FaWorm } from 'react-icons/fa';
 
 // Color themes
 const colorThemes = [
@@ -13,13 +13,13 @@ const colorThemes = [
 ];
 
 const discounts = [
-  { code: 'POTTERY5', value: '$5 off pottery wheel class', rarity: 'common', size: 'medium' },
-  { code: 'MUG10', value: '$10 off the perfect mug', rarity: 'common', size: 'medium' },
-  { code: 'GLAZE60', value: '60% off glazing', rarity: 'rare', size: 'small' },
-  { code: 'WHEEL10', value: '$10 off pottery wheel class', rarity: 'common', size: 'medium' },
-  { code: 'CLASS25', value: '25% off any class', rarity: 'uncommon', size: 'small' },
-  { code: 'CLASS10', value: '10% off any class', rarity: 'common', size: 'medium' },
-  { code: 'HAND10', value: '$10 off $25 Handbuilding class', rarity: 'common', size: 'medium' },
+  { code: 'Wheel42050', value: '$5 off pottery wheel class', rarity: 'common', size: 'small', link: 'https://www.thepotteryloop.com/booking-calendar/potterywheel?referral=service_list_widget' },
+  { code: 'Wheel918213', value: '20% off Pottery Wheel class', rarity: 'uncommon', size: 'medium', link: 'https://www.thepotteryloop.com/booking-calendar/potterywheel?referral=service_list_widget' },
+  { code: 'Wheel778120', value: '$10 off pottery wheel class', rarity: 'rare', size: 'large', link: 'https://www.thepotteryloop.com/booking-calendar/potterywheel?referral=service_list_widget' },
+  { code: 'Glaze918212', value: '20% off Glazing class (class 2)', rarity: 'common', size: 'medium', link: 'https://www.thepotteryloop.com/booking-calendar/glazing-classes?referral=service_list_widget' },
+  { code: 'Glaze921389', value: '40% off Glazing class (class 2)', rarity: 'uncommon', size: 'large', link: 'https://www.thepotteryloop.com/booking-calendar/glazing-classes?referral=service_list_widget' },
+  { code: 'Mugs42050', value: '$25 Perfect Mug class ($10 off)', rarity: 'common', size: 'large', link: 'https://www.thepotteryloop.com/booking-calendar/the-perfect-mug?referral=service_list_widget' },
+  { code: 'Hand200407', value: '20% off Hand Building class', rarity: 'rare', size: 'large', link: 'https://www.thepotteryloop.com/booking-calendar/pottery-hand-building-workshop?referral=service_list_widget' }
 ];
 
 const spoiledEggs = Array(30).fill(null).map(() => ({
@@ -246,6 +246,13 @@ const App = () => {
     setTimeout(() => setCodeCopied(false), 2000); // Reset after 2 seconds
   };
 
+  const handleRedeem = (discount) => {
+    setCurrentItem(discount);
+    setShowModal(true);
+    // Open the booking link in a new tab
+    window.open(discount.link, '_blank');
+  };
+
   const renderElement = (element, theme) => {
     const { type, position, isEgg } = element;
     const style = {
@@ -340,7 +347,8 @@ const App = () => {
     <div 
       className="min-h-screen relative transition-colors duration-1000"
       style={{
-        background: `linear-gradient(135deg, ${currentTheme.primary} 0%, ${currentTheme.secondary} 100%)`
+        background: `linear-gradient(135deg, ${currentTheme.primary} 0%, ${currentTheme.secondary} 100%)`,
+        transition: 'background 1s ease'
       }}
     >
       {/* Header */}
@@ -380,6 +388,18 @@ const App = () => {
         {/* All Elements */}
         <div ref={containerRef} className="relative min-h-[100000px] w-full overflow-hidden">
           {elements.map(element => renderElement(element, currentTheme))}
+        </div>
+
+        {/* Add Easter message at the bottom */}
+        <div className="text-center mt-32 mb-16">
+          <div className="inline-block transform rotate-12">
+            <FaWorm className="text-6xl text-white mx-auto mb-4" />
+          </div>
+          <p className="text-white text-xl font-medium">
+            You reached the bottom... don't know how but HAPPY EASTER! 
+            <br />
+            Hope to see you in the studio soon -Mike
+          </p>
         </div>
       </main>
 
@@ -444,7 +464,7 @@ const App = () => {
                       )}
                     </button>
                     <a
-                      href="https://ThePotteryLoop.com"
+                      href={currentItem?.link}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="w-full px-3 sm:px-4 py-2 bg-sage text-white rounded-lg hover:bg-sage-dark transition-colors text-center text-sm sm:text-base"
