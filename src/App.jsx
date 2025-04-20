@@ -333,9 +333,6 @@ const App = () => {
       <header className="fixed top-0 w-full bg-white bg-opacity-90 z-10 p-4 shadow-sm">
         <div className="container mx-auto">
           <div className="flex justify-between items-center">
-            <h1 className="text-2xl font-bold text-black">
-              Pottery Chicago Easter Hunt
-            </h1>
             <div className="flex gap-4">
               <a 
                 href="https://www.instagram.com/potterychicago" 
@@ -353,6 +350,11 @@ const App = () => {
               >
                 <FaGlobe className="w-6 h-6" />
               </a>
+            </div>
+            <h1 className="text-2xl font-bold text-black">
+              Pottery Chicago Easter Hunt
+            </h1>
+            <div className="flex gap-4">
               <a 
                 href="mailto:potterchicago@gmail.com?subject=Easter Egg Pottery Question" 
                 className="text-gray-700 hover:text-gray-900 transition-colors"
