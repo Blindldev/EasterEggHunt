@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FaEgg, FaLeaf, FaSeedling, FaMountain, FaWater, FaCloud, FaCircle, FaSquare, FaStar, FaTimes, FaCheck, FaInstagram, FaGlobe, FaEnvelope } from 'react-icons/fa';
+import { FaEgg, FaLeaf, FaSeedling, FaMountain, FaWater, FaCloud, FaCircle, FaSquare, FaStar, FaTimes, FaCheck, FaInstagram, FaGlobe, FaEnvelope, FaWorm } from 'react-icons/fa';
 
 // Color themes
 const colorThemes = [
@@ -13,13 +13,13 @@ const colorThemes = [
 ];
 
 const discounts = [
-  { code: 'POTTERY5', value: '$5 off pottery wheel class', rarity: 'common', size: 'medium' },
-  { code: 'MUG10', value: '$10 off the perfect mug', rarity: 'common', size: 'medium' },
-  { code: 'GLAZE60', value: '60% off glazing', rarity: 'rare', size: 'small' },
-  { code: 'WHEEL10', value: '$10 off pottery wheel class', rarity: 'common', size: 'medium' },
-  { code: 'CLASS25', value: '25% off any class', rarity: 'uncommon', size: 'small' },
-  { code: 'CLASS10', value: '10% off any class', rarity: 'common', size: 'medium' },
-  { code: 'HAND10', value: '$10 off $25 Handbuilding class', rarity: 'common', size: 'medium' },
+  { code: 'Wheel42050', value: '$5 off pottery wheel class', rarity: 'common', size: 'small', link: 'https://www.thepotteryloop.com/booking-calendar/potterywheel?referral=service_list_widget' },
+  { code: 'Wheel918213', value: '20% off Pottery Wheel class', rarity: 'uncommon', size: 'medium', link: 'https://www.thepotteryloop.com/booking-calendar/potterywheel?referral=service_list_widget' },
+  { code: 'Wheel778120', value: '$10 off pottery wheel class', rarity: 'rare', size: 'large', link: 'https://www.thepotteryloop.com/booking-calendar/potterywheel?referral=service_list_widget' },
+  { code: 'Glaze918212', value: '20% off Glazing class (class 2)', rarity: 'common', size: 'medium', link: 'https://www.thepotteryloop.com/booking-calendar/glazing-classes?referral=service_list_widget' },
+  { code: 'Glaze921389', value: '40% off Glazing class (class 2)', rarity: 'uncommon', size: 'large', link: 'https://www.thepotteryloop.com/booking-calendar/glazing-classes?referral=service_list_widget' },
+  { code: 'Mugs42050', value: '$25 Perfect Mug class ($10 off)', rarity: 'common', size: 'large', link: 'https://www.thepotteryloop.com/booking-calendar/the-perfect-mug?referral=service_list_widget' },
+  { code: 'Hand200407', value: '20% off Hand Building class', rarity: 'rare', size: 'large', link: 'https://www.thepotteryloop.com/booking-calendar/pottery-hand-building-workshop?referral=service_list_widget' }
 ];
 
 const spoiledEggs = Array(30).fill(null).map(() => ({
@@ -96,8 +96,8 @@ const App = () => {
     const pageHeight = 100000;
     const elements = [];
     
-    // Increase decorative elements to 4500 (3x more)
-    for (let i = 0; i < 4500; i++) {
+    // Increase decorative elements to 5000 (reduced from 15000)
+    for (let i = 0; i < 5000; i++) {
       const type = Math.random() > 0.7 ? 'leaf' : 
                   Math.random() > 0.6 ? 'plant' : 
                   Math.random() > 0.5 ? 'mountain' : 
@@ -105,13 +105,14 @@ const App = () => {
                   Math.random() > 0.3 ? 'cloud' :
                   Math.random() > 0.2 ? 'circle' : 'star';
       
-      const size = Math.random() * 30 + 5; // 5-35px size
+      // Increase the base size and make more elements larger
+      const size = Math.random() > 0.3 ? Math.random() * 40 + 20 : Math.random() * 20 + 5; // 20-60px for 70% of elements, 5-25px for 30%
       const opacity = 0.8 + Math.random() * 0.2;
       const rotation = Math.random() * 360;
       const scale = 0.2 + Math.random() * 1.2;
       
-      // Only 25% of elements will be animated
-      const isAnimated = Math.random() < 0.25;
+      // Only 20% of elements will be animated
+      const isAnimated = Math.random() < 0.2;
       const animationDuration = isAnimated ? 8 + Math.random() * 4 : 0; // 8-12s or no animation
       const animationDelay = isAnimated ? Math.random() * -5 : 0;
       const moveRange = isAnimated ? 5 + Math.random() * 15 : 0;
@@ -171,8 +172,8 @@ const App = () => {
       }
     });
 
-    // Increase number of discount eggs by 3x
-    const totalDiscountEggs = Math.floor(discounts.length * 3);
+    // Increase number of discount eggs to 45 (3x more)
+    const totalDiscountEggs = Math.floor(discounts.length * 7.5); // 6 * 7.5 = 45
     const extraDiscountEggs = Array(totalDiscountEggs - discounts.length).fill(null).map(() => {
       const randomDiscount = discounts[Math.floor(Math.random() * discounts.length)];
       return {
@@ -181,7 +182,7 @@ const App = () => {
       };
     });
 
-    // Keep spoiled eggs proportional (3x)
+    // Keep spoiled eggs at 15 (3x)
     const totalSpoiledEggs = Math.floor(spoiledEggs.length * 3);
     const extraSpoiledEggs = Array(totalSpoiledEggs - spoiledEggs.length).fill(null).map(() => ({
       type: 'spoiled',
@@ -201,8 +202,8 @@ const App = () => {
       const top = (row * sectionHeight) + (Math.random() * sectionHeight * 0.8);
       const left = (col * sectionWidth) + (Math.random() * sectionWidth * 0.8);
       
-      // Only 25% of eggs will be animated
-      const isAnimated = Math.random() < 0.25;
+      // Only 20% of eggs will be animated
+      const isAnimated = Math.random() < 0.2;
       
       elements.push({
         id: `egg-${index}`,
@@ -243,6 +244,13 @@ const App = () => {
     navigator.clipboard.writeText(code);
     setCodeCopied(true);
     setTimeout(() => setCodeCopied(false), 2000); // Reset after 2 seconds
+  };
+
+  const handleRedeem = (discount) => {
+    setCurrentItem(discount);
+    setShowModal(true);
+    // Open the booking link in a new tab
+    window.open(discount.link, '_blank');
   };
 
   const renderElement = (element, theme) => {
@@ -339,64 +347,55 @@ const App = () => {
     <div 
       className="min-h-screen relative transition-colors duration-1000"
       style={{
-        background: `linear-gradient(135deg, ${currentTheme.primary} 0%, ${currentTheme.secondary} 100%)`
+        background: `linear-gradient(135deg, ${currentTheme.primary} 0%, ${currentTheme.secondary} 100%)`,
+        transition: 'background 1s ease'
       }}
     >
       {/* Header */}
-      <header className="fixed top-0 w-full bg-white bg-opacity-90 z-10 p-2 sm:p-4 shadow-sm">
-        <div className="container mx-auto px-2 sm:px-4">
-          <div className="flex flex-col sm:flex-row justify-center items-center gap-2 sm:gap-6">
-            <div className="flex gap-4 sm:gap-6 order-2 sm:order-1">
-              <a 
-                href="https://www.instagram.com/potterychicago" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="text-gray-700 hover:text-pink-500 transition-colors duration-300"
-                title="Follow us on Instagram"
-              >
-                <FaInstagram className="w-5 h-5 sm:w-7 sm:h-7" />
-              </a>
-              <a 
-                href="https://thepotteryloop.com" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="text-gray-700 hover:text-blue-500 transition-colors duration-300"
-                title="Visit our website"
-              >
-                <FaGlobe className="w-5 h-5 sm:w-7 sm:h-7" />
-              </a>
-            </div>
-            <h1 className="text-lg sm:text-2xl font-bold text-black text-center order-1 sm:order-2 w-full sm:w-auto">
-              @PotteryChicago Easter Egg Hunt {/* Force rebuild */}
-            </h1>
-            <div className="flex gap-4 sm:gap-6 order-3">
-              <a 
-                href="mailto:potterchicago@gmail.com?subject=Easter Egg Pottery Question" 
-                className="text-gray-700 hover:text-red-500 transition-colors duration-300"
-                title="Contact us"
-              >
-                <FaEnvelope className="w-5 h-5 sm:w-7 sm:h-7" />
-              </a>
-            </div>
+      <header className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-sm shadow-sm">
+        <div className="container mx-auto px-4 py-3 flex justify-between items-center">
+          <div className="flex items-center space-x-4">
+            <a href="https://www.instagram.com/thepotteryloop/" target="_blank" rel="noopener noreferrer" className="text-gray-700 hover:text-gray-900 transition-colors">
+              <FaInstagram className="text-xl" />
+            </a>
+            <a href="https://thepotteryloop.com" target="_blank" rel="noopener noreferrer" className="text-gray-700 hover:text-gray-900 transition-colors">
+              <FaGlobe className="text-xl" />
+            </a>
+            <a href="mailto:info@thepotteryloop.com" className="text-gray-700 hover:text-gray-900 transition-colors">
+              <FaEnvelope className="text-xl" />
+            </a>
           </div>
+          <div className="text-center">
+            <h1 className="text-2xl font-bold text-gray-800">@PotteryChicago Easter Egg Hunt</h1>
+          </div>
+          <div className="w-24"></div> {/* Spacer for balance */}
         </div>
       </header>
 
       {/* Main Content */}
-      <main className="pt-16 sm:pt-20">
+      <main className="pt-24 min-h-screen">
         <section className="container mx-auto px-4 py-4 sm:py-8">
-          <h2 className="text-2xl sm:text-4xl font-bold text-center mb-4 sm:mb-8 text-black">
-            Find Hidden Easter Eggs!
-          </h2>
           <p className="text-base sm:text-lg text-center mb-8 sm:mb-12 text-black px-2">
             Click on the hidden eggs to discover special discounts for pottery classes!
-            Valid for 48 hours only.
+            Codes valid for 48 hours only.
           </p>
         </section>
 
         {/* All Elements */}
         <div ref={containerRef} className="relative min-h-[100000px] w-full overflow-hidden">
           {elements.map(element => renderElement(element, currentTheme))}
+        </div>
+
+        {/* Easter message at the bottom */}
+        <div className="text-center mt-32 mb-16">
+          <div className="inline-block transform rotate-12">
+            <FaWorm className="text-6xl text-white mx-auto mb-4" />
+          </div>
+          <p className="text-white text-xl font-medium">
+            You reached the bottom... don't know how but HAPPY EASTER! 
+            <br />
+            Hope to see you in the studio soon -Mike
+          </p>
         </div>
       </main>
 
@@ -461,7 +460,7 @@ const App = () => {
                       )}
                     </button>
                     <a
-                      href="https://ThePotteryLoop.com"
+                      href={currentItem?.link}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="w-full px-3 sm:px-4 py-2 bg-sage text-white rounded-lg hover:bg-sage-dark transition-colors text-center text-sm sm:text-base"
