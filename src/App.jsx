@@ -167,17 +167,26 @@ const App = () => {
       }
     });
 
-    // Increase number of eggs by 20%
-    const totalEggs = Math.floor((discounts.length + spoiledEggs.length) * 1.2);
-    const additionalEggs = totalEggs - (discounts.length + spoiledEggs.length);
-    const extraSpoiledEggs = Array(additionalEggs).fill(null).map(() => ({
+    // Increase number of discount eggs by 50%
+    const totalDiscountEggs = Math.floor(discounts.length * 1.5);
+    const extraDiscountEggs = Array(totalDiscountEggs - discounts.length).fill(null).map(() => {
+      const randomDiscount = discounts[Math.floor(Math.random() * discounts.length)];
+      return {
+        ...randomDiscount,
+        code: `${randomDiscount.code}-${Math.random().toString(36).substr(2, 4)}`
+      };
+    });
+
+    // Keep spoiled eggs the same
+    const totalEggs = totalDiscountEggs + spoiledEggs.length;
+    const extraSpoiledEggs = Array(spoiledEggs.length).fill(null).map(() => ({
       type: 'spoiled',
       message: 'Just clay! Try again!',
       size: Math.random() > 0.5 ? 'medium' : 'small'
     }));
 
     // Add remaining eggs with optimized positioning
-    [...discounts.filter(d => d.code !== 'POTTERY5'), ...spoiledEggs, ...extraSpoiledEggs].forEach((item, index) => {
+    [...discounts.filter(d => d.code !== 'POTTERY5'), ...extraDiscountEggs, ...spoiledEggs, ...extraSpoiledEggs].forEach((item, index) => {
       // Calculate position based on index to ensure even distribution
       const sectionWidth = window.innerWidth / 4; // Divide page into 4 vertical sections
       const sectionHeight = pageHeight / 4; // Divide page into 4 horizontal sections
