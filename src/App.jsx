@@ -413,8 +413,8 @@ const App = () => {
                 <FaGlobe className="w-5 h-5 sm:w-7 sm:h-7" />
               </a>
             </div>
-            <h1 className="text-lg sm:text-2xl font-bold text-black text-center order-1 sm:order-2">
-              Pottery Chicago Easter Hunt
+            <h1 className="text-lg sm:text-2xl font-bold text-black text-center order-1 sm:order-2 w-full sm:w-auto">
+              @PotteryChicago Easter Egg Hunt
             </h1>
             <div className="flex gap-4 sm:gap-6 order-3">
               <a 
